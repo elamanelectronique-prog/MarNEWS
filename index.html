@@ -1,293 +1,90 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarNews Simulation World</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<title>MarNews - أخبار المغرب</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-body {font-family:"Tajawal",sans-serif;background:#121212;color:#fff;margin:0;padding:0;}
-.navbar {background:#1f1f1f;}
-.navbar-brand{color:#ffd700;font-weight:bold;}
-.nav-link{color:#fff;}
-.nav-link:hover{color:#ffd700;}
-header{background:linear-gradient(90deg,#0a1f44,#1a2e6f);text-align:center;padding:50px;}
-header h1{font-size:3rem;font-weight:bold;}
-header p{font-size:1.2rem;color:#ccc;}
-section{padding:50px 0;}
-.section-title{font-size:2rem;font-weight:bold;margin-bottom:30px;color:#ffd700;border-bottom:3px solid #ffd700;display:inline-block;padding-bottom:10px;}
-.card{background:#1e1e1e;border:none;color:#fff;}
-.card-title{color:#ffd700;}
-footer{background:#111;text-align:center;padding:20px;color:#fff;}
-.btn-gold{background:#ffd700;color:#000;}
-.btn-gold:hover{background:#e6c200;color:#000;}
-.country-detail{display:none;background:#2c2c2c;padding:20px;margin-top:10px;border-radius:8px;}
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+body {background-color:#f4f4f9; font-family:'Tajawal', sans-serif;}
+.navbar {background-color:#1a1a1a;}
+.navbar-brand {color:#ff4500; font-weight:bold;}
+.nav-link {color:#fff !important;}
+.section-title {margin:50px 0 30px; font-size:2.5rem; text-align:center; font-weight:bold; color:#1a1a1a;}
+.card {margin-bottom:30px; border-radius:12px; box-shadow:0 8px 16px rgba(0,0,0,0.15);}
+.card img {border-top-left-radius:12px; border-top-right-radius:12px; height:200px; object-fit:cover;}
+.btn-read {background-color:#ff4500; color:#fff; border:none; transition:0.3s;}
+.btn-read:hover {background-color:#e03e00; color:#fff;}
+footer {text-align:center; padding:20px; background:#1a1a1a; color:#fff; margin-top:50px;}
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top">
-<div class="container">
-<a class="navbar-brand" href="#">MarNews</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-<div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="#dashboard">الرئيسية</a></li>
-<li class="nav-item"><a class="nav-link" href="#countries">الدول</a></li>
-<li class="nav-item"><a class="nav-link" href="#stadiums">الملاعب</a></li>
-<li class="nav-item"><a class="nav-link" href="#army">الجيش والشرطة</a></li>
-<li class="nav-item"><a class="nav-link" href="#politics">السياسة</a></li>
-<li class="nav-item"><a class="nav-link" href="#economy">الاقتصاد</a></li>
-<li class="nav-item"><a class="nav-link" href="#charts">Charts</a></li>
-</ul>
-</div>
-</div>
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">MarNews</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="#news">الأخبار</a></li>
+    </ul>
+  </div>
 </nav>
 
-<!-- Header -->
-<header>
-<h1>MarNews World Simulation</h1>
-<p>تصفح كل أخبار الدول، الملاعب، السياسة، الاقتصاد والجيش بطريقة تفاعلية</p>
-</header>
-
-<!-- Dashboard -->
-<section id="dashboard" class="container">
-<h2 class="section-title">📊 لوحة التحكم الرئيسية</h2>
-<div class="row">
-<div class="col-md-4 mb-4">
-<div class="card p-3">
-<h5 class="card-title">عدد الدول</h5>
-<p class="card-text" id="totalCountries">0</p>
-</div>
-</div>
-<div class="col-md-4 mb-4">
-<div class="card p-3">
-<h5 class="card-title">عدد الملاعب</h5>
-<p class="card-text" id="totalStadiums">0</p>
-</div>
-</div>
-<div class="col-md-4 mb-4">
-<div class="card p-3">
-<h5 class="card-title">عدد الجنود</h5>
-<p class="card-text" id="totalArmy">0</p>
-</div>
-</div>
-</div>
-</section>
-
-<!-- Countries -->
-<section id="countries" class="bg-dark">
 <div class="container">
-<h2 class="section-title">🌍 الدول</h2>
-<div class="row" id="countriesList"></div>
+  <h2 id="news" class="section-title">أخبار المغرب (2023 - 2025)</h2>
+  <div id="allNews" class="row"></div>
 </div>
-</section>
 
-<!-- Stadiums -->
-<section id="stadiums" class="container">
-<h2 class="section-title">🏟️ الملاعب والمباريات</h2>
-<div class="row" id="stadiumsList"></div>
-</section>
-
-<!-- Army -->
-<section id="army" class="bg-dark">
-<div class="container">
-<h2 class="section-title">🪖 الجيش والشرطة</h2>
-<div class="row" id="armyList"></div>
-</div>
-</section>
-
-<!-- Politics -->
-<section id="politics" class="container">
-<h2 class="section-title">👑 السياسة والحكومة</h2>
-<div class="row" id="politicsList"></div>
-</section>
-
-<!-- Economy -->
-<section id="economy" class="bg-dark">
-<div class="container">
-<h2 class="section-title">💰 الاقتصاد</h2>
-<div class="row" id="economyList"></div>
-</div>
-</section>
-
-<!-- Charts -->
-<section id="charts" class="container my-5">
-<h2 class="section-title">📊 إحصائيات الدول</h2>
-<canvas id="countryChart" height="100"></canvas>
-</section>
-
-<!-- Footer -->
 <footer>
-<p>© 2025 MarNews Simulation - جميع الحقوق محفوظة</p>
+  &copy; 2025 MarNews | كل الحقوق محفوظة
 </footer>
 
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// بيانات الدول والملاعب والجيش والسياسة والاقتصاد
-const countries = [
-{name:"المغرب", population:37, army:200000, leader:"الملك محمد السادس"},
-{name:"الجزائر", population:44, army:220000, leader:"الرئيس عبد المجيد تبون"},
-{name:"مصر", population:110, army:450000, leader:"الرئيس عبد الفتاح السيسي"},
-{name:"فرنسا", population:67, army:300000, leader:"الرئيس إيمانويل ماكرون"},
-{name:"أمريكا", population:330, army:1300000, leader:"الرئيس جو بايدن"}
-];
+// توليد التواريخ من 01/01/2023 حتى 03/10/2025
+function generateDates(start, end) {
+  let arr = [];
+  let dt = new Date(start);
+  while (dt <= end) {
+    arr.push(new Date(dt));
+    dt.setDate(dt.getDate() + 1);
+  }
+  return arr;
+}
 
-const stadiums = [
-{name:"ملعب محمد الخامس", country:"المغرب", event:"مباراة كرة قدم", crowd:"80,000 متفرج"},
-{name:"استاد القاهرة", country:"مصر", event:"مباراة كرة قدم", crowd:"75,000 متفرج"},
-{name:"ملعب الجزائر الكبير", country:"الجزائر", event:"مباراة كرة قدم", crowd:"60,000 متفرج"}
-];
+const dates = generateDates(new Date(2023,0,1), new Date(2025,9,3));
+const allNewsData = [];
+const categories = ['وطني','مظاهرة','رياضي','اقتصادي','مجتمعي'];
 
-const army = [
-{name:"الفيلق الأول", country:"المغرب", soldiers:50000},
-{name:"الشرطة الملكية", country:"المغرب", soldiers:20000},
-{name:"الحرس الجمهوري", country:"الجزائر", soldiers:30000}
-];
+dates.forEach((date, idx) => {
+  categories.forEach((cat,i) => {
+    allNewsData.push({
+      date: `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`,
+      title: `خبر ${cat} رقم ${idx+1}`,
+      img: `https://source.unsplash.com/400x200/?${cat},morocco,${i}`,
+      desc: `ملخص خبر ${cat} رقم ${idx+1} بتاريخ ${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} بصياغة واقعية حول الأحداث في المغرب.`
+    });
+  });
+});
 
-const politics = [
-{name:"محمد السادس", country:"المغرب", role:"ملك"},
-{name:"عبد المجيد تبون", country:"الجزائر", role:"رئيس"},
-{name:"عبد الفتاح السيسي", country:"مصر", role:"رئيس"}
-];
-
-const economy = [
-{name:"المغرب", gdp:140, inflation:3.2},
-{name:"الجزائر", gdp:180, inflation:4.0},
-{name:"مصر", gdp:400, inflation:5.1},
-{name:"فرنسا", gdp:2700, inflation:1.5},
-{name:"أمريكا", gdp:26000, inflation:2.0}
-];
-
-// أحداث ومظاهرات
-const events = [
-  {country:"المغرب", type:"مظاهرة", description:"مظاهرات في الرباط بسبب ارتفاع الأسعار", date:"2025-10-03"},
-  {country:"المغرب", type:"اعتقالات", description:"تم اعتقال 50 متظاهر في ملعب محمد الخامس", date:"2025-10-03"},
-  {country:"الجزائر", type:"مباراة", description:"مباراة كرة القدم بين الأهلي والجزائر الوطني", date:"2025-10-02"},
-  {country:"مصر", type:"مظاهرة", description:"مظاهرات في القاهرة ضد الضرائب الجديدة", date:"2025-10-01"},
-  {country:"أمريكا", type:"حدث رياضي", description:"نهائي Super Bowl", date:"2025-02-10"}
-];
-
-// Render functions
-function renderCountriesWithEvents(){
-  const container = document.getElementById("countriesList");
-  countries.forEach(c=>{
-    const countryEvents = events.filter(e=>e.country===c.name);
-    let eventsHTML = countryEvents.map(ev=>`<p style="color:${ev.type==='مظاهرة'||ev.type==='اعتقالات'?'#e74c3c':'#2ecc71'}">[${ev.date}] ${ev.type}: ${ev.description}</p>`).join('');
-    container.innerHTML+=`
-    <div class="col-md-4 mb-4">
-      <div class="card p-3">
-        <h5 class="card-title">${c.name}</h5>
-        <p class="card-text">السكان: ${c.population} مليون</p>
-        <p class="card-text">الجيش: ${c.army.toLocaleString()}</p>
-        <p class="card-text">الحاكم: ${c.leader}</p>
-        <button class="btn btn-gold" onclick="document.getElementById('events-${c.name}').classList.toggle('d-none')">عرض الأحداث</button>
-        <div id="events-${c.name}" class="country-detail d-none">${eventsHTML}</div>
+// إنشاء بطاقات الأخبار
+const container = document.getElementById('allNews');
+allNewsData.forEach(news => {
+  const col = document.createElement('div');
+  col.className = 'col-md-6 col-lg-4';
+  col.innerHTML = `
+    <div class="card">
+      <img src="${news.img}" class="card-img-top" alt="${news.title}">
+      <div class="card-body">
+        <h5 class="card-title">${news.title}</h5>
+        <p class="card-text"><small>${news.date}</small></p>
+        <p class="card-text">${news.desc}</p>
+        <button class="btn btn-read">اقرأ المزيد</button>
       </div>
-    </div>`;
-  });
-  document.getElementById("totalCountries").innerText=countries.length;
-}
-
-function renderStadiums(){
-  const container = document.getElementById("stadiumsList");
-  stadiums.forEach(s=>{
-    container.innerHTML+=`
-    <div class="col-md-4 mb-4">
-      <div class="card p-3">
-        <h5 class="card-title">${s.name} - ${s.country}</h5>
-        <p class="card-text">الحدث: ${s.event}</p>
-        <p class="card-text">الجمهور: ${s.crowd}</p>
-      </div>
-    </div>`;
-  });
-  document.getElementById("totalStadiums").innerText=stadiums.length;
-}
-
-function renderArmy(){
-  const container = document.getElementById("armyList");
-  army.forEach(a=>{
-    container.innerHTML+=`
-    <div class="col-md-4 mb-4">
-      <div class="card p-3">
-        <h5 class="card-title">${a.name} - ${a.country}</h5>
-        <p class="card-text">عدد الجنود: ${a.soldiers.toLocaleString()}</p>
-      </div>
-    </div>`;
-  });
-  let total=army.reduce((sum,a)=>sum+a.soldiers,0);
-  document.getElementById("totalArmy").innerText=total.toLocaleString();
-}
-
-function renderPolitics(){
-  const container = document.getElementById("politicsList");
-  politics.forEach(p=>{
-    container.innerHTML+=`
-    <div class="col-md-4 mb-4">
-      <div class="card p-3">
-        <h5 class="card-title">${p.name}</h5>
-        <p class="card-text">الدولة: ${p.country}</p>
-        <p class="card-text">المنصب: ${p.role}</p>
-      </div>
-    </div>`;
-  });
-}
-
-function renderEconomy(){
-  const container = document.getElementById("economyList");
-  economy.forEach(e=>{
-    container.innerHTML+=`
-    <div class="col-md-4 mb-4">
-      <div class="card p-3">
-        <h5 class="card-title">${e.name}</h5>
-        <p class="card-text">الناتج المحلي: ${e.gdp.toLocaleString()} مليار $</p>
-        <p class="card-text">التضخم: ${e.inflation}%</p>
-      </div>
-    </div>`;
-  });
-}
-
-// Charts
-function renderCharts(){
-  const ctx = document.getElementById('countryChart').getContext('2d');
-  const labels = countries.map(c=>c.name);
-  const armyData = countries.map(c=>{
-    let a = army.find(ar=>ar.country===c.name);
-    return a ? a.soldiers : 0;
-  });
-  const populationData = countries.map(c=>c.population);
-  const gdpData = economy.map(e=>e.gdp);
-
-  new Chart(ctx,{
-    type:'bar',
-    data:{
-      labels:labels,
-      datasets:[
-        {label:'عدد الجنود', data:armyData, backgroundColor:'#e74c3c'},
-        {label:'عدد السكان (مليون)', data:populationData, backgroundColor:'#3498db'},
-        {label:'الناتج المحلي (مليار $)', data:gdpData, backgroundColor:'#f1c40f'}
-      ]
-    },
-    options:{
-      responsive:true,
-      plugins:{
-        legend:{position:'top'},
-        title:{display:true,text:'📊 إحصائيات الدول'}
-      }
-    }
-  });
-}
-
-// Call render functions
-renderCountriesWithEvents();
-renderStadiums();
-renderArmy();
-renderPolitics();
-renderEconomy();
-renderCharts();
+    </div>
+  `;
+  container.appendChild(col);
+});
 </script>
+
 </body>
 </html>
